@@ -14,5 +14,5 @@ RUN apk --no-cache add ca-certificates
 RUN mkdir /app
 WORKDIR /app
 COPY --from=builder /go/src/github.com/marceloaguero/shippy-consignment-service .
-
+EXPOSE 50051
 CMD ["./shippy-consignment-service"]
