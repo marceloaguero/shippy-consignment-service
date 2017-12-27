@@ -14,7 +14,7 @@ import (
 
 const (
 	port          = ":50051"
-	vesselService = "vessel-service:50051"
+	vesselService = "vessel-service:50052"
 )
 
 type Repository interface {
