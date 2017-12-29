@@ -13,9 +13,9 @@ import (
 )
 
 const (
-	defaultHost   = "db:27017"
-	port          = ":50051"
-	vesselService = "vessel-service:50052"
+	defaultHost          = "db:27017"
+	port                 = ":50051"
+	addressVesselService = "vessel-service:50052"
 )
 
 func main() {
@@ -32,9 +32,7 @@ func main() {
 		log.Panicf("Could not connect to datastore with host %s - %v", host, err)
 	}
 
-	repo := &ConsignmentRepository{}
-
-	conn, err := grpc.Dial(vesselService, grpc.WithInsecure())
+	conn, err := grpc.Dial(addressVesselService, grpc.WithInsecure())
 	if err != nil {
 		log.Fatalf("Did not connect to vessel service: %v", err)
 	}
@@ -48,6 +46,7 @@ func main() {
 	}
 	s := grpc.NewServer()
 
+	// pb.RegisterShippingServiceServer(s, &service{session, vesselClient})
 	pb.RegisterShippingServiceServer(s, &service{session, vesselClient})
 	reflection.Register(s)
 	if err := s.Serve(lis); err != nil {
