@@ -1,0 +1,26 @@
+version: "3.2"
+services:
+  db:
+    image: mongo
+    networks:
+      - consignment
+    deploy:
+      restart_policy:
+        condition: on-failure
+  vessel-service:
+    image: vessel-service
+    networks:
+      - consignment
+    deploy:
+      restart_policy:
+        condition: on-failure
+  consignment-service:
+    image: consignment-service
+    networks:
+      - consignment
+    deploy:
+      restart_policy:
+        condition: on-failure
+networks:
+  consignment:
+    external: true
