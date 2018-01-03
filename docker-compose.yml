@@ -12,6 +12,9 @@ services:
     networks:
       - consignment
     deploy:
+      update_config:
+        parallelism: 1
+        delay: 10s
       restart_policy:
         condition: on-failure
   consignment-service:
@@ -19,6 +22,9 @@ services:
     networks:
       - consignment
     deploy:
+      update_config:
+        parallelism: 1
+        delay: 10s
       restart_policy:
         condition: on-failure
 networks:
